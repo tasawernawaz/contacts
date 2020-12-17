@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import AddContact from './AddContact'
 import ListContact from './ListContacts'
 import * as ContactsApi from './utils/ContactsAPI'
 
 class App extends Component {
   state = {
-    contacts: []
+    contacts: [],
   }
 
   componentDidMount() {
@@ -27,10 +29,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ListContact
-          contacts={this.state.contacts}
-          onClickRemoveContact={this.removeContact}
-        />
+        <Route exact path="/" render={() => (
+            <ListContact
+            contacts={this.state.contacts}
+            onClickRemoveContact={this.removeContact}
+            />
+        )
+        } />
+        <Route path="/add-contact" component={AddContact} />
       </div>
     );
   }
